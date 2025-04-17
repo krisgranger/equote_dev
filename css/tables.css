@@ -1,0 +1,53 @@
+/* TABLE FORMATTING*/
+/* TabTitle controls text style in the header for the Accordion panel. */
+.TabTitle{color:#222222 !important;font-family:calibri, arial, sans-serif;}
+/* TabRedSubTitle controls text style of optional information in the header for the Accordion panel. */
+.TabRedSubTitle{color:#B50101;}
+/* TabSubTitle is used for displaying TabNotes. */
+.TabSubTitle{color:#666666;}
+table {
+    width:100%;
+    margin: 0 auto;
+    border-collapse: collapse !important;
+}
+/* TotalsTable corresponds to Quote Summary. FinanceTable corresponds to Terms and Finacing table. */
+table.TotalsTable, table.FinanceTable {
+    margin:15px auto;
+    border-spacing: 0;
+    font-size: 0.75rem;
+}
+table.FinanceTable{margin:15px auto 20px auto;}
+/* Item level tables have a smaller font size. */
+.TabContent {
+    font-family:calibri, arial, sans-serif;
+    font-size: 0.75rem;
+}
+/* Used on the item level tables and Quote Summary table, respectively. Adds a faint line after each row. */
+tr.TabDetailRow, tr.TotalsRow{ border-bottom: 1px solid #EFEFEF;}
+.BdrBtm{border-bottom: 2px solid #d2d2d2;padding-bottom:5px;padding-top:5px;}
+/* Used on the Sub Header or Sub Footer rows. Gives it a gray background and adjusts the border lines accordingly. */
+tr.SubHeadFootRow{background-color: #EFEFEF; color:#222222; border-bottom:1px solid #E7E7E7;border-top:1px solid #E7E7E7;}
+/* Denotes the Checkbox width (used to define the checkbox column). */
+td.ChBx{width: 25px;}
+td.Qty{width: 60px;text-align:center;}
+td.Thumb{width:60px;}
+td.Price{width:80px;}
+/* Standard padding for all table cells */
+td{padding:3px;vertical-align:top;}
+.ItemNotes{font-family: calibri, arial, sans-serif;font-size: 0.75rem;font-style: italic; border-bottom: 1px solid #EFEFEF;}
+/* Controls the Quote Summary header */
+.TotalsHeaderRow{font-weight: bold;}
+.Line {
+    border-bottom: 1px solid #CCCCCC;
+    margin: 4px 0;
+}
+/* Controls Quote Summary content. */
+.TotalsTab {
+    background-color: #EFEFEF;
+    text-align: center;
+    border-bottom:1px solid #E7E7E7;
+}
+/*Controls background color for the terms and recurring totals*/
+.FinanceTotals{background-color:#E0E0E0;}
+/* Changes optional tabs or items to gray */
+.Optional{color:#888888;}

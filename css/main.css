@@ -1,0 +1,146 @@
+/* General styling */
+html{font-size:100%;}
+.Banner { background-repeat:no-repeat; padding: 5px;margin: 0 -15px;}
+.Logo{max-height:100%; max-width:100%;display:inline-block;position:relative;margin:0 auto;vertical-align:middle;}
+a:link{color:#acacac;}
+a:visited{color:#888888;}
+a{text-decoration: none;}
+a img {border: none;}
+
+/*Used with an element to align other elements vertically*/			
+.helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+body {
+    background-color:#EBEBEB;
+    font-family:calibri, arial, sans-serif !important;
+    font-size:0.875rem;
+    min-width:1170px;
+    margin:0;
+    padding:0;
+}
+:focus, :active{outline: 0;}
+
+/* Text styling */
+h1 {
+    font-weight:bold;
+    color:#222222;
+    font-size: 1rem;
+    margin-bottom:0;
+}
+h2 {
+    margin:0;
+    font-weight:bold;
+    font-size:1.375rem;
+    padding-bottom:2px;
+    margin-bottom:0px;
+}
+
+/* Used for "Your available options" verbiage spacing. */
+p.SubHeader {
+    margin: 6px 0 8px 0;
+    font-size:1rem;
+}
+
+/* Used for Prepared By and Prepared For positioning. */
+p.Name {
+    margin: .3em 0 0 0 !important;
+}
+p.Footer {
+    text-align: center;
+    font-size: 0.75rem;
+    color:#666666;
+    margin: 10px;
+}
+
+.Bold{font-weight: bold;}
+.Underline{text-decoration: underline;}
+
+/* Red Notification Messages */
+.ImportantMessage{color:#FF0000;}
+.TextAccentColor{color:#FF0000;}
+        
+#RequiredFieldsMessage{color:#FF0000;font-size:1rem;}
+
+/* Sales Rep Picture size */
+#RepPic {
+    height:100px;
+}
+/* Sales Rep signature image size */
+#RepSig {
+    height:30px;
+    max-width:100px;
+}
+/* Container for both RepPic and RepSig */
+#RepImg {
+    float:right;
+    margin-left:10px;
+    text-align:center;
+}
+
+/* Green check when quote is approved. */
+img.completed {
+    position:relative;
+    top:5px;
+    padding-right:2px;
+}
+/* Red "!" balloon image */
+img.required {
+    width:200px;
+    border:0;
+    margin-left:90px;
+}
+
+/* Item Styling */
+.PackageHeader{background-color:#DFDFDF;}
+.PackageItem{background-color:#F6F6F6;}
+.ProductDetailsImg {
+    float:left;
+    width:15%;
+    margin:0 5px;
+}
+.ProductDetailsImg img {
+    min-width:20px;
+    max-width:100%;
+    max-height:150px;
+}
+.ProductDetails {
+    float:left;
+    #BeginIf("#Quote.OrderPorterShowImage","True")width:calc(85% - 15px);#EndIf()
+}
+
+/*Notifications*/
+.alert {
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+    border-radius: 50px;
+    margin-bottom: 15px;
+}
+
+.alert.success {background-color: #4CAF50;}
+.alert.info {background-color: #2196F3;}
+.alert.warning {background-color: #ff9800;}
+.alert.error {background-color: #FF0000;}
+.alert table{color:#FFFFFF;}
+
+/*ALIGNMENT*/
+.Left{text-align:left}
+.Right{text-align:right}
+.Center{text-align:center}
+.FLeft{float:left}
+.FRight{float:right}
+.Clear{clear:both}
+.VTop{vertical-align:top}
+.VMid{vertical-align:middle}
+.VBottom{vertical-align:bottom}
+
+/* Footer */
+.FooterImg{
+    height:20px;
+    vertical-align: middle;
+    padding:5px;
+    border: 0;
+}

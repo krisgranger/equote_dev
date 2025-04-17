@@ -1,0 +1,97 @@
+/* Main Content Container */
+.Container {
+    width:1170px;
+    padding: 0 15px 15px 15px;
+    border: 1px solid #AAAAAA;
+    border-top: 0;
+    box-shadow: 0px 0px 12px rgba(0,0,0, 0.8);
+    -moz-box-shadow: 0px 0px 12px rgba(0,0,0, 0.8);
+    margin: 0 auto;
+    -webkit-box-shadow: 0px 0px 12px rgba(0,0,0, 0.8);
+    background-color: #FFFFFF;
+    behavior: url(https://www.orderporter.com/cust/jQuery/PIE-1.0.0/PIE.htc); /* Enables CSS3 in IE6-8 */
+}
+
+/*INTRODUCTION HEADER*/
+.IntroHeader {
+    padding:0 15px;
+    margin-bottom:2em;
+}
+.introduction {
+    padding:5px 10px;
+    margin:0 auto 0 auto;
+    float: left;
+    width:98%;
+}
+.IntroLeft {
+    clear:both;
+    padding: 0 5px;
+    vertical-align: top;
+    width: 32%;
+    float: left;
+}
+.IntroMid {
+    padding: 0 5px;
+    width:32%;
+    vertical-align: top;
+    float: left;
+}
+.IntroRight {
+    padding: 0 5px;
+    width: 32%;
+    vertical-align: top;
+    float: right;
+}
+
+/* Red not approved message at top of page */
+.NotApprovedMessage {
+    font-size:1rem;
+    color:#C02929;
+    font-weight:bold;
+    margin: 0 auto 5px auto;
+    text-align: center;	
+}
+/* Black approved message at top of page */
+.ApprovalMessage {
+    font-size:1rem;
+    color:#222222;
+    font-weight:bold;
+}
+
+/* TWO COLUMN LAYOUT */
+.LeftColumn {
+    width:840px;
+    float:left;
+    vertical-align: top;
+    margin: 0 10px;
+}
+.RightColumn {
+    width: 290px;
+    float:left;
+    margin: 0px 0 10px 2px;
+    padding: 0 5px;
+}
+img.PDF {
+    display: block;
+    margin: 0 auto; /* centers the image horizontally */
+    border: 0;
+    width: 55px;
+}
+
+/* RIGHT COLUMN */
+.ActiveQuotes {
+    width: 240px;
+    text-align: center;
+    max-height: 150px;
+    overflow: auto;
+    margin: 0 auto 0 auto;
+}
+.imgPortrait {
+    position:relative;
+    margin:0 auto;
+    width:240px;
+    height:auto;
+}
+
+/*  COMMENTS SECTION  */
+.Comments {padding:0; width:100%; text-align: center;}

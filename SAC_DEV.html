@@ -1,0 +1,62 @@
+#ForceHTTPS()#UseExpire()<!--Order Porter Request-->
+<!-- Version 8/2024 -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=11" >
+		<title>#Location.LocationName</title>
+
+		<!-- External Libraries -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+		<script language="javascript" type="text/javascript" src="https://www.orderporter.com/cust/jQuery/jSignature/jSignature.min.js"></script>
+     	<link rel="Stylesheet" type="text/css" href="https://www.orderporter.com/cust/Sell/script/jquery/jquery-ui-1.10.4.custom.min.css" />
+		<script src='https://secure.bngpaymentgateway.com/token/Collect.js' data-tokenization-key='5mN8N7-jhr55W-N22pxX-uAW2s9'></script>
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/krisgranger/equote_dev/css/main.css" />
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/krisgranger/equote_dev/css/layout.css" />
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/krisgranger/equote_dev/css/forms.css" />
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/krisgranger/equote_dev/css/payment.css" />
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/krisgranger/equote_dev/css/tables.css" />
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/krisgranger/equote_dev/css/animations.css" />
+
+		<!-- Circuit-specific styling that you might want to keep in the main file -->
+        <style type="text/css">
+			/* Circuit Layout */
+			.Banner{height: 195px;background-image: url("https://oflsusee01.blob.core.windows.net/DSATechnologies/header1200.jpg");}
+			.LogoContainer{position: relative;top:25px;left:875px;height:120px;width:205px;white-space:nowrap;text-align:center;}
+			h2{color:#092f56;}
+			.h2Title{color:#092f56;}
+			.tHead{background-color: #EB1C38;color:#fff;}
+			.tFoot{background-color: #EB1C38;color:#fff;}
+			.Panel{margin: 17px 0px;border: 1px solid #AAAAAA;padding: 10px;background-color: #FAFAFA;box-shadow: 2px 2px 10px 0px rgba(100, 100, 100, 0.8);-webkit-box-shadow: 2px 2px 10px 0px rgba(100, 100, 100, 0.8);-moz-box-shadow: 2px 2px 10px 0px rgba(100, 100, 100, 0.8);}
+		</style>
+
+      	#BeginIf("#Quote.OrderPorterPaymentMode","ConnectBooster")
+		<!-- ConnectBooster specific script will be loaded from external file -->
+		<script src="https://cdn.jsdelivr.net/gh/krisgranger/equote_dev/js/connectbooster.js"></script>
+      	#EndIf()
+
+		<!-- Custom JavaScript -->
+		<script src="https://cdn.jsdelivr.net/gh/krisgranger/equote_dev/js/main.js"></script>
+		<script src="https://cdn.jsdelivr.net/gh/krisgranger/equote_dev/js/signature.js"></script>
+		<script src="https://cdn.jsdelivr.net/gh/krisgranger/equote_dev/js/validation.js"></script>
+		<script src="https://cdn.jsdelivr.net/gh/krisgranger/equote_dev/js/payment.js"></script>
+
+		#BeginIf("#Quote.OrderPorterPaymentMode","Authorize.net")
+		<!-- Authorize.net specific script will be loaded from external file -->
+		<script src="https://cdn.jsdelivr.net/gh/krisgranger/equote_dev/js/authorizenet.js"></script>
+		#EndIf()
+	</head>
+	<body>
+		<!-- The rest of your HTML body content remains unchanged -->
+		<!-- Simply copy everything from <body> to </body> here, except for the scripts that we've moved to external files -->
+
+		<!-- BEGIN PAGE CONTAINER  -->
+		<div class = "Container" id = "Container">
+		#Quote.BeginFormHtml()
+		<!-- ... rest of your HTML ... -->
+		</div>
+	</body>
+</html>
