@@ -1,0 +1,155 @@
+<!-- BEGIN PAYMENT SECTION -->
+#BeginIfNot("#Quote.OrderPorterPaymentMode","None")#BeginIfNot2("#Quote.OrderPorterPaymentMode","Terms")#BeginIfNot3("#Quote.OrderPorterPaymentMode","")#BeginIfNot4("#Quote.OrderPorterPaymentMode","Wise-Pay")
+<div class="Panel">
+    <div class="SilverHeader">
+        <h2>Payment Information</h2>
+    </div>
+
+    <div class="SilverPanel">
+        #ApprovedBegin()<br />
+        <p class='ApprovalMessage Center'>This quote has been approved. The payment transaction ID was
+            #Payment.TransactionId.</p><br />#ApprovedEnd()
+
+        #UnapprovedBegin()
+        <!-- If this quote uses Payment processing Paypal Payflow Pro and the quote total is not 0, display the following: -->
+        #BeginIfNot6("#Quote.OrderPorterPaymentMode","Authorize.net")                    
+                                                                                                                                                             
+        #OrderPorterPaymentBegin()
+        <div id="FieldColumnRight">
+            <div id="payment">
+                <!--begin connectbooster-->
+                <div style="position: relative;">
+                    <h1>Billing Address
+                    </h1>
+                    <form method="post">
+                        <table class="tableDataInput" style="display: inline-flex;">
+                            <tr style="display: grid;">
+                                <td style="display: inline-block;">
+                                    <p class="SigPay"><label for="firstnamebilling">First Name:</label></p>
+                                    <input class="paymentInput" size="30"
+                                        type="text" name="#Billing.InputFirstName"
+                                        value="#Billing.FirstName" id="firstnamebilling">
+                                </td>
+                                <td style="display: inline-block;">
+                                    <p class="SigPay"><label for="lastnamebilling">Last Name:</label></p>
+                                    <input class="paymentInput" size="30"
+                                        type="text" name="#Billing.InputLastName" value="#Billing.LastName" id="lastnamebilling">
+                                </td>
+                            <tr style="display: grid;">
+                                <td>
+                                    <p class="SigPay"><label for="BillingAddress1">Address:</label></p>
+                                    <input class="paymentInput" size="30"
+                                        type="text" name="#Billing.InputAddress1" value="#Billing.Address1" id="BillingAddress1">
+                                </td>
+                            </tr>
+                            <tr style="display: grid;">
+                                <td>
+                                    <input class="paymentInput" size="30"
+                                        type="text" name="#Billing.InputAddress2" value="#Billing.Address2">
+                                </td>
+                            </tr>
+                            <tr style="display: flex;">
+                                <td><p class="SigPay"><label for="BillingCity">City:</label></p>
+                                  <input class="paymentInput" size="30" type="text"
+                                        name="#Billing.InputCity" value="#Billing.City" id="BillingCity">
+                                </td>
+                                <td><p class="SigPay"><label for="BillingState">State:</label></p>
+                                  <input class="paymentInput" size="30" type="text"
+                                        name="#Billing.InputState" value="#Billing.State" id="BillingState">
+                                </td>
+                                <td><p class="SigPay"><label for="BillingPostalCode">Postal Code:</label></p>
+                                    <input class="paymentInput" size="30" type="text"
+                                        name="#Billing.InputPostalCode" value="#Billing.PostalCode" id="BillingPostalCode">
+                                </td>
+                            </tr>
+                            <tr style="display: grid;">
+                                <td>
+                                    <p class="SigPay"><label for="BillingCountry">Country:</label></p>
+                                    <input class="paymentInput" size="30"
+                                        type="text" name="country" value="#Billing.Country" id="BillingCountry">
+                                </td>
+                            </tr>
+
+                        </table>
+                        <div id="otherPaymentCreditCardFields">
+                            <p class="SigPay">Credit Card Number:</p>
+                            <!-- CreditCardNumber tag generates an <input> tag. Can inherit CSS styling. -->
+                            <div class="Field tableDataInput">#CreditCardNumber</div>
+                            <p class="SigPay">Security Code:</p>
+                            <!-- CreditCardSecurityCode tag generates an <input> tag. Can inherit CSS styling. -->
+                            <div class="Field tableDataInput">#CreditCardSecurityCode</div>
+                            <p class="SigPay">Expiration Date:</p>
+                            <!-- CreditCardMonth CreditCardYear generates a dropdown. -->
+                            <div class="Field tableDataInput">#CreditCardMonth / #CreditCardYear</div>
+                        </div>
+                    </form>
+
+                    <div id="connectBoosterButtons" style="display: none;">
+                        <h1>Payment Option</h1>
+                        <button class="paymentButtons" id="customBankAccountPayment" type="button">
+                            Pay using ACH
+                            <span style="display: none;" id="ckAdjustmentBtn"></span>
+                        </button>
+                        <button class="paymentButtons" id="customCCPayment" type="button">
+                            Pay by credit card
+                            <span style="display: none;" id="ccAdjustmentBtn"></span>
+                        </button>
+                    </div>
+                    <div id="paymentDataBody" class="paymentData">
+                        <div class="paymentDataContent">
+                            <h3 id="paymentDataBodyTitle" class="paymentDataContentTitle"></h3>
+                            <div class="paymentDataMainContent">
+                                <div class="paymentDataMainContentItem" id="quoteAmount"></div>
+                                <div class="paymentDataMainContentItem" id="paymentData"></div>
+                                <div class="paymentDataMainContentItem" id="gatewayEnabled"
+                                    style="display: none;">
+                                    <input type="checkbox" id="GatewayAddToVault" name="GatewayAddToVault">
+                                    <label>Store payment information</label>
+                                </div>
+                                <div class="paymentDataMainContentItem" id="adjustmentsEnabled" style="">
+                                </div>
+                                <input type="hidden" id="ConnectBoosterToken" name="ConnectBoosterToken"
+                                    value="">
+                                <input type="hidden" id="ConnectBoosterPaymentType"
+                                    name="ConnectBoosterPaymentType" value="">
+                            </div>
+                        </div>
+                      <div id="paymentClear" style="cursor:pointer;float:right;font-weight:normal;text-decoration:underline;"><a>Clear Payment Option</a></div>
+                    </div>
+                </div>
+              <!--end connectbooster-->
+              #CreditCardProcessing
+              </div>
+          </div>
+        #OrderPorterPaymentEnd()
+        #EndIfNot6()
+        #BeginIf("#Quote.OrderPorterPaymentMode","Authorize.net")
+            #CreditCardProcessing
+            <input type="hidden" id="authorizeNetTransactionId" name="authorizeNetTransactionId">
+            <input type="hidden" id="newAuthorizeNetTemplate" name="newAuthorizeNetTemplate" value="yes">
+            <div style="text-align: center">
+              <button id="btnOpenAuthorizeNetPopup" onclick="AuthorizeNetPopup.openPopup()" form="formAuthorizeNetPopup">Pay via Authorize.net</button>
+              <div id="successAuthNetPayment" style="display:none;">Payment authorized. </div>
+            </div>
+            <div id="divAuthorizeNetPopup" style="display:none;" class="AuthorizeNetPopupGrayFrameTheme">
+            <div class="AuthorizeNetPopupOuter">
+              <div class="AuthorizeNetPopupTop">
+                <div class="AuthorizeNetPopupClose">
+                  <a href="javascript:;" onclick="window.location.reload()" title="Close"> </a>
+                </div>
+              </div>
+              <div class="AuthorizeNetPopupInner">
+                <iframe name="iframeAuthorizeNet" id="iframeAuthorizeNet" src="empty.html" frameborder="0" scrolling="yes"></iframe>
+              </div>
+              <div class="AuthorizeNetPopupBottom">
+                <div class="AuthorizeNetPopupLogo" title="Powered by Authorize.net"></div>
+              </div>
+                <div id="divAuthorizeNetPopupScreen" style="display:none;"></div>
+              </div>
+           </div> 
+        #EndIf()
+        #UnapprovedEnd()
+    </div>
+</div>
+#EndIfNot4()#EndIfNot3()#EndIfNot2()#EndIfNot()
+<!-- END PAYMENT SECTION -->

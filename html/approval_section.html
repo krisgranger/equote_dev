@@ -1,0 +1,82 @@
+<!-- BEGIN APPROVAL SECTION -->
+<div class="Panel">
+    <div class="SilverHeader">
+        <h2>#BeginIfNot("#Quote.OrderPorterPaymentMode","None")#BeginIfNot2("#Quote.OrderPorterPaymentMode","Terms")#BeginIfNot3("#Quote.OrderPorterPaymentMode","")#BeginIfNot4("#Quote.OrderPorterPaymentMode","Wise-Pay")
+          4. Approval
+          #EndIfNot4()#EndIfNot3()#EndIfNot2()#EndIfNot()
+          #BeginIf("#Quote.OrderPorterPaymentMode","None")3. Approval#EndIf()
+          #BeginIf("#Quote.OrderPorterPaymentMode","Terms")3. Approval#EndIf()
+          #BeginIf("#Quote.OrderPorterPaymentMode","Wise-Pay")3. Approval#EndIf()
+          #BeginIf("#Quote.OrderPorterPaymentMode","")3. Approval#EndIf()
+          </h2>
+    </div>
+    <div class="SilverPanel">
+        <div id="Approve">
+            <!-- BEGIN TERMS AND CONDITIONS -->
+            <p class="Approve">#Quote.TermsAndConditions</p>
+            #BeginSelectedFinanceItems()#SelectedFinanceItem.Description <br />#EndSelectedFinanceItems()
+            <!-- If the quote has been deleted, display the following: -->
+            #DeletedBegin()
+                <p class="ApprovalMessage">This Quote has been deactivated</p>
+                <p>Please contact your Sales Representative at <a href="mailto:#Salesrep.EmailAddress">#Salesrep.EmailAddress</a> for more information.</p>
+            #DeletedEnd()
+            <!-- If the quote has expired, display the following:-->
+            #ExpiredBegin()
+                <p class="ApprovalMessage">This quote has expired</p>
+                <p>Please contact your Sales Representative at <a href="mailto:#Salesrep.EmailAddress">#Salesrep.EmailAddress</a> for more information.</p>
+            #ExpiredEnd()
+            <!-- If the quote has been approved, display the following: -->
+            #ApprovedBegin()<br /><p class='ApprovalMessage Center'>This quote has been approved</p><br />#ApprovedEnd()
+            <!-- If the quote has not been approved, display the required checkbox. -->
+            #UnapprovedBegin()<br /><center><img class='reqcheck' src="https://www.orderporter.com/cust/NewTemplates/required-fields-icon.png" />#Quote.GenApprovedCheckbox() <label for="ApprovalCheck" class='Bold'>I accept the above conditions</label></center>#UnapprovedEnd()
+            <!-- END TERMS AND CONDITIONS -->
+            <!-- BEGIN APPROVAL FIELDS -->
+            <!-- If the quote has not been approved, display the following: -->
+            #UnapprovedBegin()
+            <div id="ApprovalFieldsBox">
+                <!-- If the "Use E-signature" checkbox is checked (in Publish Settings), display the following: -->
+                #BeginIf2("#Quote.OrderPorterEsign","True")
+                <div id="FieldColumnLeft" class="FieldColumn">
+                    <h1>E-Signature</h1>
+                    <p class="SigPay"><label for="Initials">Your Initials:</label></p>
+                    <div class="Field tableDataInput">
+                        <input id="Initials" class='FieldName' type="text" autocomplete="off" name="#Quote.InputOrderPorterInitialsSig" value="#Quote.OrderPorterInitialsSig" size="20" />
+                        <img src="https://www.orderporter.com/cust/NewTemplates/required-fields-icon.png" class='VMid req' />
+                    </div>
+                    <p class="SigPay"><label for="Email">Your Email Address:</label></p>
+                    <div class="Field tableDataInput">
+                        <input id="Email" class='FieldName' type="email" name="#Quote.InputOrderPorterEmailSig" size="40" value="#Quote.OrderPorterEmailSig"/>
+                        <img src="https://www.orderporter.com/cust/NewTemplates/required-fields-icon.png" class='VMid req' />
+                    </div>
+                    <p class="SigPay"><label for="PONumber">Purchase Order Number:</label></p>
+                    <div class="Field tableDataInput"><input id="PONumber" type="text" autocomplete="off" name="#Quote.InputPurchaseOrderNumber" size="40" value="#Quote.PurchaseOrderNumber" /></div>
+                </div>
+                
+                <div class="Clear"></div> <!-- Used for formatting -->
+                <!-- BEGIN SIGNATURE BOX --> 
+                <!-- If the "Show Signature Box" checkbox is checked, display the following: -->
+                #BeginIf("#Quote.OrderPorterShowSignature","True")
+                <div id="SignatureRow" style="display:none;">
+                    <p class="SigPay">Sign Here <img src="https://www.orderporter.com/cust/NewTemplates/required-fields-icon.png" class='VMid req' id="sigReq"/> :</p>
+                    <div class="Center">
+                        <img class="SignX" src="https://www.orderporter.com/cust/jQuery/jSignature/x.png"/>
+                        <div id="Signature"></div>
+                        <input type="button" id="ClearButton" value="Clear Signature" />
+                        <input name="base64customersig" type="hidden" class="uniquesignatureclass" />
+                    </div>
+                </div>
+                #EndIf()
+                #EndIf2()
+            </div>
+            #UnapprovedEnd()
+            <!-- Accept order button -->
+            #UnapprovedBegin()<p id="RequiredFieldsMessage" style="text-align:center;">Please fill out the required fields above and check 'I accept the above conditions'</p>#UnapprovedEnd()
+            <div class="Center">#UnapprovedBegin()
+              #BeginIfNot("#Quote.OrderPorterPaymentMode","Wise-Pay")<input type="submit" value="Accept Order" id="submission" />#EndIfNot()
+              #BeginIf("#Quote.OrderPorterPaymentMode","Wise-Pay")<input type="submit" value="Pay and Approve Quote" id="submission" />#EndIf()
+              #UnapprovedEnd()</div>
+            <!-- END SIGNATURE BOX -->
+        </div>
+    </div>
+</div>
+<!-- END APPROVAL SECTION -->

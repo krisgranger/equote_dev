@@ -1,0 +1,19 @@
+<!-- BEGIN RIGHT COLUMN COMMENTS SECTION -->
+#UnapprovedBegin()
+<div class="Panel">
+    <div class="SilverRightPanel">
+        <div class="Comments tableDataInput">
+        <h2>Comments or questions?</h2><br/>
+            #CommentAddPeerReview()
+            <input type="hidden" name="#CommentSubject()" value="Customer Comment or Question from #Customer.EmailAddress"/>
+            <input type="hidden" name="#CommentFirstName()" value="#Customer.FirstName"/>
+            <input type="hidden" name="#CommentLastName()" value="#Customer.LastName"/>    
+            If you have any comments or questions about this quote, please enter them here and click submit. Your 
+            feedback will be logged and emailed to #Salesrep.EmailAddress.
+            <textarea style="width: 100%; height:300px;margin: 20px 0;padding: 0;overflow: auto;border-radius: 0.25rem;" rows="20" name="#CommentContent()"></textarea>
+            <input type="submit" value="Submit Question / Comment"/>
+        </div>
+    </div>
+</div>
+#UnapprovedEnd()
+<!-- END RIGHT COLUMN COMMENTS SECTION -->

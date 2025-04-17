@@ -1,0 +1,15 @@
+<!-- BEGIN RIGHT COLUMN ACTIVE QUOTES SECTION -->
+#BeginShowActiveQuotes()
+<div class="Panel">
+    <div class="SilverRightPanel">
+        <div class="Center"><h2>Your Active Quotes:</h2></div><br/>
+        <div class="ActiveQuotes">
+            #BeginActiveQuotes()
+            <a target="_blank" href="http://www.orderporter.com/OrderPorter1.7/online.order?passcode=#ActiveQuotes.OrderPorterPasscode&entrykey=#ActiveQuotes.OrderPorterTemplate">#ActiveQuotes.PrintedquoteReadableID #ActiveQuotes.QuoteName</a><br />
+            #ActiveQuotes.OrderPorterTemplateDestination<br />
+            #EndActiveQuotes()
+        </div>
+    </div>
+</div>
+#EndShowActiveQuotes()
+<!-- END RIGHT COLUMN ACTIVE QUOTES SECTION -->

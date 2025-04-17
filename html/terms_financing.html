@@ -1,0 +1,120 @@
+<!-- BEGIN TERMS & FINANCING -->
+<!-- Begin if there are selected finance items
+If no finance items are selected, display nothing -->
+#BeginSelectedFinanceItems()
+<table class="FinanceTable">
+    <!-- Begin finance table header. This is the first row of the finance table. -->
+    <tr class="TotalsRow Bold">
+        <td class="tHead Left" colspan="2">#SelectedFinanceItem.FinancingGroup</td>
+        <td class="Center tHead Qty">Payments</td>
+        <td class="Center tHead Price">Interval</td>
+        <td class="Right Price tHead">Amount</td>
+    </tr>
+    <!-- End finance table header -->
+    <!-- Begin iterating through the Finance items. -->
+    #BeginFinanceItems()
+    #BeginIfNot6("#FinanceItem.Name","CW Agreement")
+    #BeginIfNot7("#FinanceItem.TotalAmount#FinanceItem.RecurringTotalAggregated","00")
+    #BeginIfNot8("#FinanceItem.SpreadOneTime#FinanceItem.RecurringPeriods","True0")
+    <!-- Begin if the finance item is in the same financing group as the selected finance item.
+    Items with different financing groups will appear in separate tables. -->
+    #BeginIf("#SelectedFinanceItem.FinancingGroup","#FinanceItem.FinancingGroup")
+    <tr class="TotalsRow">
+        <td class="ChBx BdrBtm" #BeginIfNot("#FinanceItem.SpreadOneTime","True")#BeginIfNot3("#FinanceItem.Periods","0")#BeginIfNot2("#FinanceItem.RecurringPeriods","0")#BeginIfNot4("#FinanceItem.TotalAmount","0")#BeginIfNot5("#FinanceItem.RecurringTotalAggregated","0")rowspan="2" style="vertical-align:middle;"#EndIfNot5()#EndIfNot4()#EndIfNot2()#EndIfNot3()#EndIfNot()>#FinanceItem.GenSelectionCheckbox()</td>
+        <td class="BdrBtm" #BeginIfNot("#FinanceItem.SpreadOneTime","True")#BeginIfNot3("#FinanceItem.Periods","0")#BeginIfNot2("#FinanceItem.RecurringPeriods","0")#BeginIfNot4("#FinanceItem.TotalAmount","0")#BeginIfNot5("#FinanceItem.RecurringTotalAggregated","0")rowspan="2" style="vertical-align:middle;"#EndIfNot5()#EndIfNot4()#EndIfNot2()#EndIfNot3()#EndIfNot()>#FinanceItem.Name</td>
+            <!-- If there are recurring periods, display the following -->
+            #BeginIfNot2("#FinanceItem.RecurringPeriods","0")
+                #BeginIfNot("#FinanceItem.RecurringTotalAggregated","0")
+                <td style="border-left:1px solid #EFEFEF;" class="Center #BeginIf2('#FinanceItem.TotalAmount', '0')BdrBtm#EndIf2() #BeginIf2('#FinanceItem.SpreadOneTime', 'True')BdrBtm#EndIf2() Qty">#FinanceItem.RecurringPeriods</td>
+                <td class="Center #BeginIf2('#FinanceItem.TotalAmount', '0')BdrBtm#EndIf2() #BeginIf2('#FinanceItem.SpreadOneTime', 'True')BdrBtm#EndIf2() Price">#BeginIfNot3("#FinanceItem.RecurringRevenueLabel","")#FinanceItem.RecurringRevenueLabel#EndIfNot3()#BeginIf3("#FinanceItem.RecurringRevenueLabel","")Monthly#EndIf3()</td>
+                <td class="Right #BeginIf2('#FinanceItem.TotalAmount', '0')BdrBtm#EndIf2() #BeginIf2('#FinanceItem.SpreadOneTime', 'True')BdrBtm#EndIf2() Price">#FinanceItem.PrintedRecurringTotalAmount</td>
+                #EndIfNot()
+            #EndIfNot2()
+            <!-- This checks for finance items containing both recurring and one-time to determine number of rows to display -->
+            #BeginIfNot4("#FinanceItem.SpreadOneTime","True")
+            #BeginIfNot3("#FinanceItem.Periods","0")
+            #BeginIfNot2("#FinanceItem.RecurringPeriods","0")
+            #BeginIfNot("#FinanceItem.RecurringTotalAmount","0")
+            </tr><tr>
+            #EndIfNot()
+            #EndIfNot2()
+            #EndIfNot3()
+            #EndIfNot4()
+            <!-- End check for displaying 2 rows -->
+            <!-- Display one-time amounts -->
+            #BeginIfNot4("#FinanceItem.SpreadOneTime","True")
+            #BeginIfNot3("#FinanceItem.Periods","0")
+            #BeginIfNot2("#FinanceItem.TotalAmount","0")
+                <td style="border-left:1px solid #EFEFEF;" class="Center Qty BdrBtm">#FinanceItem.Periods</td>
+                <td class="Center Price BdrBtm">#IfReplace("#FinanceItem.PeriodInterval", "None", "One-Time")#IfNotReplace("#FinanceItem.PeriodInterval", "None", "#FinanceItem.PeriodInterval")</td>
+                <td class="Right Price BdrBtm">#FinanceItem.PrintedPeriodPaymentAmount</td>
+            #EndIfNot2()
+            #EndIfNot3()
+            #EndIfNot4()
+            <!-- End check for displaying 2 rows -->
+    </tr>
+    #EndIf()
+    #EndIfNot8()
+    #EndIfNot7()
+    #EndIfNot6()
+    #EndFinanceItems()
+    <!-- End iterating through the finance items. -->
+    <!-- Begin the high level summary of the Finance table. This includes the Selected Payment,
+    Total Payment, and Downpayment if there is any.-->
+    #BeginIfGreaterThan("#SelectedFinanceItem.RecurringPeriods","1")
+        #BeginIfNot2("#SelectedFinanceItem.RecurringTotalAggregated","0")
+        <tr class="TotalsRow">
+            <td class="ChBx"></td>
+            <td class="Bold" colspan="3">Selected Recurring Payment</td>
+            <td class="Bold Right">#SelectedFinanceItem.PrintedRecurringTotalAmount</td>
+        </tr>
+        #EndIfNot2()
+    #EndIfGreaterThan()
+    #BeginIfNot3("#SelectedFinanceItem.SpreadOneTime","True")
+    #BeginIfGreaterThan("#SelectedFinanceItem.Periods","1")
+    <tr class="TotalsRow">
+        <td class="ChBx"></td>
+        <td class="Bold" colspan="3">Selected Payment</td>
+        <td class="Bold Right">#SelectedFinanceItem.PrintedPeriodPaymentAmount</td>
+    </tr>
+    #EndIfGreaterThan()
+    #EndIfNot3()
+    #BeginIfNot("#SelectedFinanceItem.DownPayment","0")
+    <tr class="TotalsRow">
+        <td class="ChBx"></td>
+        <td class="Bold" colspan="3">Down Payment</td>
+        <td class="Bold Right">#SelectedFinanceItem.PrintedDownPayment</td>
+    </tr>
+    #EndIfNot()
+    #BeginIfNot("#SelectedFinanceItem.RecurringPeriods","0")
+        #BeginIfNot2("#SelectedFinanceItem.RecurringTotalAggregated","0")
+        <tr class="TotalsRow">
+            <td class="ChBx"></td>
+            <td class="Bold" colspan="3">Total of Recurring Payments</td>
+            <td class="Bold Right">#SelectedFinanceItem.RecurringTotalAggregated.Currency</td>
+        </tr>
+        #EndIfNot2()
+    #EndIfNot()
+    #BeginIfNot3("#SelectedFinanceItem.SpreadOneTime","True")
+        #BeginIfNot("#SelectedFinanceItem.Periods","0")
+            #BeginIfNot2("#SelectedFinanceItem.TotalAmount","0")
+                <tr class="TotalsRow">
+                    <td class="ChBx"></td>
+                    <td class="Bold" colspan="3">Total of Payments</td>
+                    <td class="Bold Right">#SelectedFinanceItem.PrintedTotalAmount</td>
+                </tr>
+            #EndIfNot2()
+        #EndIfNot()
+    #EndIfNot3()
+    
+    <!-- End high level summary of Finance table. -->
+</table>
+<div class="Line"></div>
+<!-- BEGIN UPDATE OPTIONS BUTTON FOR TERMS  -->
+<div class="UpdateButton">
+    <div>#UnapprovedBegin()<input type="submit" value="Update Options" />#UnapprovedEnd()</div>
+</div>
+<!--  END UPDATE OPTIONS BUTTON FOR TERMS -->
+#EndSelectedFinanceItems()
+<!-- End iterating through selected finance items. -->
+<!-- END TERMS & FINANCING -->

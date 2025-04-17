@@ -1,0 +1,94 @@
+<!-- BEGIN SUMMARY TABLE -->
+<table class="TotalsTable">
+    <!-- Begin summary table header. This is the first row of the table. -->
+    <tr class="TotalsHeaderRow">
+        #BeginIf2("#Quote.OrderPorterShowTabCb","True")<td class="Center tHead ChBx"></td>#EndIf2()
+        <td class="tHead Left">Quote Summary</td>
+        #BeginIfNot("#Quote.RecurringPlusOptions","0")<td class="tHead Right Price">Recurring</td>#EndIfNot()
+        <td class="Right Price tHead">One-Time</td>
+    </tr>
+    <!-- End summary table header -->
+    <!-- Begin iterating through non-empty tabs -->
+    #BeginTab("IsEmpty!=True;TotalQuantity!=0;")
+    <tr #BeginIf2("#Tab.IsTotalsIncluded","False")style="display:none;"#EndIf2() #BeginIf("#Tab.GridFormat","Pre Outline")style="display:none;"#EndIf() #BeginIf("#Tab.GridFormat","Post Outline")style="display:none;"#EndIf()>
+        #BeginIf2("#Quote.OrderPorterShowTabCb","True")<td class="TotalsTab">#Tab.GenOptionalCheckbox()</td>#EndIf2()
+        <td class='TotalsTab Left #BeginIfNot("#Tab.IsOptional","False") Optional#EndIfNot()'>#Tab.TabName Subtotal</td>
+        #BeginIfNot2("#Quote.RecurringPlusOptions","0")
+            <td class='TotalsTab Right #BeginIfNot("#Tab.IsOptional","False") Optional#EndIfNot()'>
+                #BeginIfNot3("#Tab.IsOptional","True")
+                    #Tab.PrintedRecurringSubtotal
+                #EndIfNot3()
+                #BeginIf3("#Tab.IsOptional","True")
+                    #Tab.RecurringPlusOptions.Currency
+                #EndIf3()
+            </td>
+        #EndIfNot2()
+        <td class='TotalsTab Right #BeginIfNot("#Tab.IsOptional","False") Optional#EndIfNot()'>
+            #BeginIfNot2("#Tab.IsOptional","True")
+                #Tab.PrintedSubtotal
+            #EndIfNot2()
+            #BeginIf2("#Tab.IsOptional","True")
+                #Tab.PrintedSubtotalPlusOptions
+            #EndIf2()
+        </td>
+    </tr>
+    #EndTab()
+    <!-- End tab iteration -->
+    <!-- Begin section with subtotal, tax, shipping, etc. -->
+    <tr class="TotalsRow">
+        #BeginIf("#Quote.OrderPorterShowTabCb","True")<td class="ChBx"></td>#EndIf()
+        <td>Subtotal</td>
+        <td class="Right" #BeginIf("#Quote.RecurringPlusOptions","0")style="display:none;"#EndIf()>#Quote.PrintedRecurringSubtotal</td>
+        <td class="Right">#BeginIfNot("#Quote.Subtotal", "0")#Quote.PrintedSubtotal#EndIfNot()</td>
+    </tr>
+    #BeginIfNot("#Quote.ShippingSubtotal", "0")
+    <tr class="TotalsRow">
+        #BeginIf("#Quote.OrderPorterShowTabCb","True")<td class="ChBx"></td>#EndIf()
+        <td>Shipping</td>
+        <td class="Right" #BeginIf("#Quote.RecurringPlusOptions","0")style="display:none;"#EndIf()></td>
+        <td class="Right">#Quote.PrintedShippingSubtotal</td>
+    </tr>
+    #EndIfNot()
+    #HasTaxBegin()
+    <tr class="TotalsRow">
+        #BeginIf("#Quote.OrderPorterShowTabCb","True")<td class="ChBx"></td>#EndIf()
+        <td>#Format.TaxLabel</td>
+        <td class="Right" #BeginIf("#Quote.RecurringPlusOptions","0")style="display:none;"#EndIf()>#Quote.PrintedRecurringTax</td>
+        <td class="Right">#BeginIfNot("#Quote.Subtotal", "0")#Quote.PrintedTaxWithShipping#EndIfNot()</td>
+    </tr>
+    #HasTaxEnd()
+    #HasGSTBegin()
+    <tr class="TotalsRow">
+        #BeginIf("#Quote.OrderPorterShowTabCb","True")<td class="ChBx"></td>#EndIf()
+        <td>#Format.GSTLabel</td>
+        <td class="Right" #BeginIf("#Quote.RecurringPlusOptions","0")style="display:none;"#EndIf()>#Quote.PrintedRecurringGst</td>
+        <td class="Right">#Quote.PrintedGst</td>
+    </tr>
+    #HasGSTEnd()
+    #HasPSTBegin()
+    <tr class="TotalsRow">
+        #BeginIf("#Quote.OrderPorterShowTabCb","True")<td class="ChBx"></td>#EndIf()
+        <td>#Format.PSTLabel</td>
+        <td class="Right" #BeginIf("#Quote.RecurringPlusOptions","0")style="display:none;"#EndIf()>#Quote.PrintedRecurringPst</td>
+        <td class="Right">#Quote.PrintedPst</td>
+    </tr>
+    #HasPSTEnd()
+    <!-- End subtotaling section -->
+    <!-- Begin totals row. This is the final row in the summary table. -->
+    <tr class="TotalsRow">
+        #BeginIf("#Quote.OrderPorterShowTabCb","True")<td class="ChBx tFoot"></td>#EndIf()
+        <td class="Bold Left tFoot">Total Amount</td>
+        <td class="Right Bold tFoot" #BeginIf("#Quote.RecurringPlusOptions","0")style="display:none;"#EndIf()>#Quote.PrintedRecurringTotal</td>
+        <td class="Right Bold tFoot">#Quote.PrintedQuoteTotal</td>
+    </tr>
+    <!-- End totals row -->
+</table>
+<div class="Line"></div>
+<!-- BEGIN UPDATE OPTIONS BUTTON FOR OPTIONS -->
+#BeginIfNot("#Quote.OrderPorterShowTabCb#Quote.OrderPorterShowItemCb#Quote.OrderPorterShowQty","FalseFalseFalse")
+<div class="UpdateButton">
+    <div>#UnapprovedBegin()<input type="submit" value="Update Options" />#UnapprovedEnd()</div>
+</div>
+#EndIfNot()
+<!-- END UPDATE OPTIONS BUTTON FOR OPTIONS -->
+<!-- END SUMMARY TABLE -->

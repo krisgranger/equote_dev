@@ -1,0 +1,45 @@
+<!-- BEGIN INTRODUCTION -->
+<div class="IntroHeader" id="SilverIntroHeader">
+    <div class="FLeft" style="width:50%;"><h2 class="Left h2Title">#Quote.QuoteName</h2></div>
+    <div class="FRight" style="width:50%;"><h2 class="Right h2Title">Quote #: #Quote.PrintedquoteReadableIDv#Quote.Version</h2></div>
+</div>
+<div class="Clear"></div> <!-- Used for formatting -->
+<div class="introduction" id="SilverIntro">
+    <div class="IntroLeft">
+    <!-- Displays Customer information. -->
+        <h2 class="Left">Prepared For</h2>
+        <p class="Name Bold">#BeginIfNot("#Customer.AccountName","")#Customer.AccountName</p>#EndIfNot()
+        #Customer.FirstName #Customer.LastName<br />
+        #BeginIfNot("#Customer.Address1#Customer.Address2","")#Customer.Address1 #Customer.Address2<br />#EndIfNot()
+        #BeginIfNot("#Customer.City#Customer.State#Customer.PostalCode","")#Customer.City, #Customer.State #Customer.PostalCode#EndIfNot()</p>
+    </div>
+    <!-- This section alerts the user to sign the terms in Section 3: Approval and E-Payment. -->
+    <div class="IntroMid">
+        #BeginIfNot("#ErrorMessage()","")<a href='#Approve'><div class="alert error"><table style="vertical-align:middle;margin: 0 auto 0 0;"><tr><td style="vertical-align:top;padding: 0;"><img src="https://oflsusee02.blob.core.windows.net:443/customer/Assets/error.png" style="vertical-align: top;padding: 0 5px;"></td><td style="vertical-align:middle;padding: 0;">You have received the following error:<br/>#ErrorMessage()</td></tr></table></div></a>#EndIfNot()
+        #UnapprovedBegin()<a href='#Approve'><div class="alert info"><table style="vertical-align:middle;margin: 0 auto 0 0;"><tr><td style="vertical-align:middle;padding: 0;"><img src="https://oflsusee02.blob.core.windows.net:443/customer/Assets/notice.png" style="vertical-align: middle;padding: 0 5px;"></td><td style="vertical-align:middle;padding: 0;">This quote has not been approved.<br/>Please review and sign below.</td></tr></table></div></a>#UnapprovedEnd()
+        #ExpiredBegin()<div class="alert warning"><table style="vertical-align:middle;margin: 0 auto 0 0;"><tr><td style="vertical-align:middle;padding: 0;"><img src="https://oflsusee02.blob.core.windows.net:443/customer/Assets/warning.png" style="vertical-align: middle;padding: 0 5px;"></td><td style="vertical-align:middle;padding: 0;">This quote has expired. Please<br/>contact your sales representative.</td></tr></table></div>#ExpiredEnd()
+        #ApprovedBegin()<div class="alert success"><table style="vertical-align:middle;margin: 0 auto 0 0;"><tr><td style="vertical-align:middle;padding: 0;"><img src="https://oflsusee02.blob.core.windows.net:443/customer/Assets/approved.png" style="vertical-align: middle;padding: 0 5px;"></td><td style="vertical-align:middle;padding: 0;">This quote has been approved. 
+            #BeginIfNot("#Quote.OrderPorterPaymentMode","None")#BeginIfNot2("#Quote.OrderPorterPaymentMode","Terms")#BeginIfNot3("#Quote.OrderPorterPaymentMode","")#BeginIfNot4("#Quote.OrderPorterPaymentMode","Wise-Pay")<br/>Transaction ID: #Payment.TransactionId#EndIfNot4()#EndIfNot3()#EndIfNot2()#EndIfNot()</td></tr></table></div>
+        #ApprovedEnd()
+    </div>
+    <div class="IntroRight">
+    <!-- Sales rep picture and signature -->
+        <div id="RepImg">
+        #BeginShowRepPicture()
+            <img src="#Salesrep.Picture" id="RepPic" />
+        #EndShowRepPicture()
+        #BeginShowRepSignature()
+            <br /><img src="#Salesrep.Signature" id="RepSig" />
+        #EndShowRepSignature()
+        </div>
+        <div class="Right">
+    <!-- Displays Sales Rep information. -->
+            <h2>Prepared By</h2>
+            <p class="Name Bold">#Salesrep.FirstName #Salesrep.LastName</p>
+            #BeginIfNot("#Salesrep.JobTitle","")#Salesrep.JobTitle<br />#EndIfNot()
+            #BeginIfNot("#Salesrep.Phone","")Direct: #Salesrep.Phone<br />#EndIfNot()
+            #BeginIfNot("#Salesrep.EmailAddress","")#Salesrep.EmailAddress#EndIfNot()
+        </div>
+    </div>
+</div>
+<!-- END INTRODUCTION -->

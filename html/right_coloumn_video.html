@@ -1,0 +1,45 @@
+<!-- BEGIN RIGHT COLUMN VIDEO SECTION -->
+#BeginIfNot("#Quote.EmbeddedVideoHtml","")
+<div class="Panel">
+    <div class="SilverRightPanel">
+        <h2 class="Center">A Video Message from #Salesrep.FirstName #Salesrep.LastName</h2>
+        #Quote.EmbeddedVideoHtml
+    </div>
+</div>
+#EndIfNot()
+<!-- Displays uploaded video -->
+#VideoBegin()
+<div class="Panel">
+    <div class="SilverRightPanel">
+        <div style="width:240px; margin:0 auto;">
+            <h2 class="Center">A Video Message from #Salesrep.FirstName #Salesrep.LastName</h2>
+            <div name="mediaspace" id="mediaspace"></div> 
+            <script type='text/javascript' src="https://www.orderporter.com/quosal/video/silverlight.js"></script> 
+            <script type='text/javascript' src="https://www.orderporter.com/quosal/video/wmvplayer.js"></script> 
+            <script type="text/javascript">
+                var cnt = document.getElementById("mediaspace");
+                var src = 'https://www.orderporter.com/quosal/video/wmvplayer.xaml';
+                var cfg = {
+                    file: 'https://www.orderporter.com/orderporterpdf/#Quote.QuoteVideoHashcode.wmv',
+                    image: 'https://www.orderporter.com/quosal/video/preview.jpg',
+                    height: '214',
+                    width: '240'
+                };
+                var ply = new jeroenwijering.Player(cnt, src, cfg);
+            </script>
+        </div>
+    </div>
+</div>
+#VideoEnd()
+<!-- Begin Video Library -->
+#BeginQuoteVideos()
+<div class="Panel">
+    <div class="SilverRightPanel">
+        #QuoteVideo.EmbedCode
+        <div class="videotitle" title="#QuoteVideo.Title">#QuoteVideo.Title.Trunc(28)</div>
+        <div class="videodescription" title="#QuoteVideo.Description">#QuoteVideo.Description.Trunc(75)</div>
+    </div>
+</div>
+#EndQuoteVideos()
+<!-- End Video Library -->
+<!-- END RIGHT COLUMN VIDEO SECTION -->
